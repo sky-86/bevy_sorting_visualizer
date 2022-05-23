@@ -1,0 +1,38 @@
+[package]
+name = "sort"
+version = "0.1.0"
+authors = ["sky-86 <sky86one@gmail.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[dependencies]
+wasm-bindgen = "0.2.8"
+getrandom = { version = "0.2", features = ["js"] }
+rand = "0.8.5"
+
+[dependencies.bevy]
+version = "0.7"
+default-features = false
+features = [
+  "bevy_winit",         # Window management
+  "bevy_render",        # Rendering framework core
+  "bevy_core_pipeline", # Higher-level rendering abstractions
+  "bevy_sprite",        # 2D (sprites) rendering
+]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.30"
+
+[profile.release]
+opt-level = "s"
+# I think lto fixed the weird green column bug
+lto = "thin"
+
