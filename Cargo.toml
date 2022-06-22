@@ -1,0 +1,41 @@
+[package]
+name = "sorting_visual"
+version = "0.1.0"
+publish = false
+authors = ["Skyler Favors <sky86one@gmail.com>"]
+edition = "2021"
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+
+[features]
+default = [
+    "bevy/bevy_winit",
+    "bevy/render",
+    "bevy/png",
+    "bevy/x11",
+]
+
+dev = [
+    "bevy/dynamic",
+]
+
+[dependencies]
+bevy = { version = "0.7", default-features = false }
+rand = "0.8.3"
+bevy-web-resizer = "2.0.0"
+wee_alloc = "0.4.5"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+winit = { version = "0.25", features=["x11"]}
+
+[build-dependencies]
+embed-resource = "1.4"
